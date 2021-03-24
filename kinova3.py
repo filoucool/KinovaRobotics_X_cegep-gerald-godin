@@ -63,7 +63,6 @@ def main():
                     if data[6] > 127:
                         tz -= 65536
                     print ("T: ", tx, ty, tz)
-                        
                     if tx >= 100:
                         command = Base_pb2.TwistCommand()
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
@@ -112,7 +111,6 @@ def main():
                         twist.linear_z = -0.5
                         base.SendTwistCommand(command)
                         base.Stop()
-                    
           
                 if data[0] == 2:
                     rx = data[1] + (data[2]*256)
@@ -125,7 +123,6 @@ def main():
                     if data[6] > 127:
                         rz -= 65536
                     print ("R: ", rx, ry, rz)
-
                     if rx >= 100:
                         command = Base_pb2.TwistCommand()
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
@@ -176,7 +173,28 @@ def main():
                         base.Stop()
 
                 if data[0] == 3 and data[1] == 0:
-                    
+                    # Make sure the arm is in Single Level Servoing mode
+                    base_servo_mode = Base_pb2.ServoingModeInformation()
+                    base_servo_mode.servoing_mode = Base_pb2.SINGLE_LEVEL_SERVOING
+                    base.SetServoingMode(base_servo_mode)
+                    # Move arm to ready position
+                    action_type = Base_pb2.RequestedActionType()
+                    action_type.action_type = Base_pb2.REACH_JOINT_ANGLES
+                    action_list = base.ReadAllActions(action_type)
+                    action_handle = None
+                    for action in action_list.action_list:
+                        if action.name == "Home":
+                            action_handle = action.handle
+
+                    if action_handle == None:
+                        print("Can't reach safe position.")
+
+                    e = threading.Event()
+                    notification_handle = base.OnNotificationActionTopic(
+                        check_for_end_or_abort(e),
+                        Base_pb2.NotificationOptions()
+                    )
+                    base.ExecuteActionFromReference(action_handle)
                         
             except usb.core.USBError:
                 print("USB error")
