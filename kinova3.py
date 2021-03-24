@@ -126,31 +126,57 @@ def main():
                         rz -= 65536
                     print ("R: ", rx, ry, rz)
 
-# #                     if rx >= 100:
-# command = Base_pb2.TwistCommand()
-#                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
-#                         command.duration = 0
-#                         twist = command.twist
-#                         twist.linear_x = 0.05
-#                         twist.linear_y = 0.05
-#                         twist.linear_z = 00.5
-#                         twist.angular_x = 0.05
-#                         twist.angular_y = 0.05
-#                         twist.angular_z = 0.05
-#                         base.SendTwistCommand(command)
-#                         base.Stop()
-#                         time.sleep(0.1)
-#                     if rx <= -100:
-#                     if ry >= 100:
-#                     if ry <= -100:
-#                     if rz >= 100:
-#                     if rz <=  -100:
+                    if rx >= 100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_x = 0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
+                    if rx <= -100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_x = -0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
+                    if ry >= 100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_y = 0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
+                    if ry <= -100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_y = -0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
+                    if rz >= 100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_z = 0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
+                    if rz <=  -100:
+                        command = Base_pb2.TwistCommand()
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                        command.duration = 0
+                        twist = command.twist
+                        twist.angular_z = -0.05
+                        base.SendTwistCommand(command)
+                        base.Stop()
 
                 if data[0] == 3 and data[1] == 0:
-                    run = Falsetest
-                    usb.util.dispose_resources(dev)
-                    if reattach:
-                        dev.attach_kernel_driver(0)
+                    
                         
             except usb.core.USBError:
                 print("USB error")
