@@ -68,7 +68,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_x = 0.5
+                        twist.linear_x = 1
                         base.SendTwistCommand(command)
                         base.Stop()
                     if tx <= -100:
@@ -76,7 +76,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_x = -0.5
+                        twist.linear_x = -1
                         base.SendTwistCommand(command)
                         base.Stop()
                     if ty >= 100:
@@ -84,7 +84,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_y = 0.5
+                        twist.linear_y = 1
                         base.SendTwistCommand(command)
                         base.Stop()
                     if ty <= -100:
@@ -92,7 +92,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_y = -0.5
+                        twist.linear_y = -1
                         base.SendTwistCommand(command)
                         base.Stop()
                     if tz >= 100:
@@ -100,7 +100,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_z = 0.5
+                        twist.linear_z = 1
                         base.SendTwistCommand(command)
                         base.Stop()
                     if tz <= -100:
@@ -108,7 +108,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.linear_z = -0.5
+                        twist.linear_z = -1
                         base.SendTwistCommand(command)
                         base.Stop()
           
@@ -128,7 +128,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_x = 0.05
+                        twist.angular_x = 70
                         base.SendTwistCommand(command)
                         base.Stop()
                     if rx <= -100:
@@ -136,15 +136,15 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_x = -0.05
+                        twist.angular_x = -70
                         base.SendTwistCommand(command)
-                        base.Stop()
+                        base.Stop() 
                     if ry >= 100:
                         command = Base_pb2.TwistCommand()
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_y = 0.05
+                        twist.angular_y = 70
                         base.SendTwistCommand(command)
                         base.Stop()
                     if ry <= -100:
@@ -152,7 +152,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_y = -0.05
+                        twist.angular_y = -70
                         base.SendTwistCommand(command)
                         base.Stop()
                     if rz >= 100:
@@ -160,7 +160,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_z = 0.05
+                        twist.angular_z = 100
                         base.SendTwistCommand(command)
                         base.Stop()
                     if rz <=  -100:
@@ -168,7 +168,7 @@ def main():
                         command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                         command.duration = 0
                         twist = command.twist
-                        twist.angular_z = -0.05
+                        twist.angular_z = -100
                         base.SendTwistCommand(command)
                         base.Stop()
 
