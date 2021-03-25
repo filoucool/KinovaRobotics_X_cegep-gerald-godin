@@ -15,8 +15,6 @@ TIMEOUT_DURATION = 10
   
 def main():
     dev = usb.core.find(idVendor=0x256f, idProduct=0xc635)
-    if dev is None: raise ValueError('SpaceNavigator not found');
-    else: print ('SpaceNavigator found')
     cfg = dev.get_active_configuration()
     intf = cfg[(0,0)]
     ep = usb.util.find_descriptor(intf, custom_match = lambda e: usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN)
@@ -27,15 +25,13 @@ def main():
     ep_in = dev[0][(0,0)][0]
     ep_out = dev[0][(0,0)][1]
     
-    # Import the utilities helper module
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
     args = utilities.parseConnectionArguments() # Parse arguments
     with utilities.DeviceConnection.createTcpConnection(args) as router: # Create connection and get router
         base = BaseClient(router) # Create required services
         while 1:
-            try:
                 data = dev.read(ep_in.bEndpointAddress, ep_in.bLength, 0)
-                def CreateCommand(vel, axys, mode):
+                def CreateCommand(vel, axys, mode): # command template with vel, axys, mode values
                     command = Base_pb2.TwistCommand()
                     command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                     command.duration = 0
@@ -68,12 +64,12 @@ def main():
                     if data[4] > 127:ty -= 65536
                     if data[6] > 127:tz -= 65536
                     print ("T: ", tx, ty, tz)
-                    if tx >= 100: CreateCommand(1,"x","linear")
-                    if tx <= -100: CreateCommand(-1,"x","linear")
-                    if ty >= 100: CreateCommand(1,"y","linear")
-                    if ty <= -100: CreateCommand(-1,"y","linear")
-                    if tz >= 100: CreateCommand(1,"z","linear")
-                    if tz <= -100: CreateCommand(-1,"z","linear")
+                    if tx >= 100: CreateCommand(2,"x","linear")
+                    if tx <= -100: CreateCommand(-2,"x","linear")
+                    if ty >= 100: CreateCommand(2,"y","linear")
+                    if ty <= -100: CreateCommand(-2,"y","linear")
+                    if tz >= 100: CreateCommand(2,"z","linear")
+                    if tz <= -100: CreateCommand(-2,"z","linear")
                 if data[0] == 2:
                     rx = data[1] + (data[2]*256)
                     ry = data[3] + (data[4]*256)
@@ -82,20 +78,18 @@ def main():
                     if data[4] > 127:ry -= 65536
                     if data[6] > 127:rz -= 65536
                     print ("R: ", rx, ry, rz)
-                    if rx >= 100: CreateCommand(70,"x","angular")
-                    if rx <= -100: CreateCommand(-70,"x","angular") 
-                    if ry >= 100: CreateCommand(70,"y","angular")
-                    if ry <= -100: CreateCommand(-70,"y","angular")
+                    if rx >= 100: CreateCommand(100,"x","angular")
+                    if rx <= -100: CreateCommand(-100,"x","angular") 
+                    if ry >= 100: CreateCommand(100,"y","angular")
+                    if ry <= -100: CreateCommand(-100,"y","angular")
                     if rz >= 100: CreateCommand(100,"z","angular")
                     if rz <=  -100: CreateCommand(-100,"z","angular")
 
                 if data[0] == 3 and data[1] == 0:
-                    # Make sure the arm is in Single Level Servoing mode
-                    base_servo_mode = Base_pb2.ServoingModeInformation()
+                    base_servo_mode = Base_pb2.ServoingModeInformation() # Make sure the arm is in Single Level Servoing mode
                     base_servo_mode.servoing_mode = Base_pb2.SINGLE_LEVEL_SERVOING
                     base.SetServoingMode(base_servo_mode)
-                    # Move arm to ready position
-                    action_type = Base_pb2.RequestedActionType()
+                    action_type = Base_pb2.RequestedActionType() # Move arm to ready position
                     action_type.action_type = Base_pb2.REACH_JOINT_ANGLES
                     action_list = base.ReadAllActions(action_type)
                     action_handle = None
@@ -108,9 +102,6 @@ def main():
                         check_for_end_or_abort(e),
                         Base_pb2.NotificationOptions())
                     base.ExecuteActionFromReference(action_handle)
-                 
-            except usb.core.USBError:
-                print("USB error")            
-
+                    #end of main and loop
 if __name__ == "__main__":
     main()
