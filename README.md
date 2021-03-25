@@ -1,13 +1,13 @@
 <H1> Librairies et codes en rapport avec le bras robotique GEN3 de Kinova Robotics. </H1>
 
-<P><BR>
+<P>Plus d'informations à venir!<BR>
  
 <a href="https://github.com/filoucool/kinova_app"><span>Application Kinova</span></a>
 </P>
 
 <H1> Vous ne trouvez pas ce qu'il vous faut? </H1>
 <ul>
-  <li> Félix Chenette-Stewart sur le Omnivox Gérald-Godin ou 1661633@cgodin.qc.ca</li>
+  <li> Félix Chenette-Stewart sur Omnivox Gérald-Godin ou 1661633@cgodin.qc.ca</li>
   <li> Ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a></li>
   <li> Venir me voir à mon bureau 469a (au fond de la classe 469b ou au fond du laboratoire 468) <br>tous les jours entre 9am et 9pm</li>
  <br>
