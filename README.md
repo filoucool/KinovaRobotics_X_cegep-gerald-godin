@@ -10,6 +10,7 @@
   <li> Félix Chenette-Stewart sur le Omnivox Gérald-Godin ou 1661633@cgodin.qc.ca</li>
   <li> Ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a></li>
   <li> Venir me voir à mon bureau 469a (au fond de la classe 469b ou au fond du laboratoire 468) <br>tous les jours entre 9am et 9pm</li>
+ <br>
  <P> <strong> <u> Il est préférable d'ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a> </u><strong> </p>
  </ul>
  
