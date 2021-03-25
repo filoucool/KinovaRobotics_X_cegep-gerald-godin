@@ -7,9 +7,9 @@
 
 <H1> Vous ne trouvez pas ce qu'il vous faut? </H1>
 <ul>
-  <li> Félix Chenette-Stewart, Rachid Benali ou Mauricio Gomez sur le Omnivox Gérald-Godin</li>
+  <li> Félix Chenette-Stewart sur le Omnivox Gérald-Godin ou 1661633@cgodin.qc.ca</li>
   <li> Ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a></li>
-  <li> Aller au bureau des professeurs</li>
+  <li> Aller à mon bureau 469a (au fond de la classe 469b ou au fond du laboratoire 468)</li>
  <P> <strong> <u> Il est préférable d'ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a> </u><strong> </p>
  </ul>
  
