@@ -25,6 +25,7 @@ def main():
     ep_in = dev[0][(0,0)][0] #data
     ep_out = dev[0][(0,0)][1]
     
+    position = 0
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
     args = utilities.parseConnectionArguments() # Parse arguments
     with utilities.DeviceConnection.createTcpConnection(args) as router: # Create connection and get router
@@ -86,22 +87,19 @@ def main():
                     if rz <=  -100: CreateCommand(-100,"z","angular")
 
                 if data[0] == 3 and data[1] == 0: #side button Left, goes to a sade position
-                    base_servo_mode = Base_pb2.ServoingModeInformation() # Make sure the arm is in Single Level Servoing mode
-                    base_servo_mode.servoing_mode = Base_pb2.SINGLE_LEVEL_SERVOING
-                    base.SetServoingMode(base_servo_mode)
-                    action_type = Base_pb2.RequestedActionType() # Move arm to ready position
-                    action_type.action_type = Base_pb2.REACH_JOINT_ANGLES
-                    action_list = base.ReadAllActions(action_type)
-                    action_handle = None
-                    for action in action_list.action_list:
-                        if action.name == "Home":
-                            action_handle = action.handle
-                    
-                    e = threading.Event()
-                    notification_handle = base.OnNotificationActionTopic(
-                        check_for_end_or_abort(e),
-                        Base_pb2.NotificationOptions())
-                    base.ExecuteActionFromReference(action_handle)
+                    proportional_gain = 2.0
+                    router = router
+                    position += 0.1
+                    gripper_command = Base_pb2.GripperCommand()
+                    finger = gripper_command.gripper.finger.add()
+                    gripper_command.mode = Base_pb2.GRIPPER_POSITION
+                    finger.finger_identifier = 1
+                    if position < 0.9:
+                        finger.value = position
+                        base.SendGripperCommand(gripper_command)
+                        print(position)
+                    else:
+                        position = 0
                     #end of main and loop
 if __name__ == "__main__":
     main()
