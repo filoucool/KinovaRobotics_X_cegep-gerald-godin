@@ -65,10 +65,10 @@ def main():
                     if data[4] > 127:ty -= 65536
                     if data[6] > 127:tz -= 65536
                     print ("T: ", tx, ty, tz) #prints values
-                    if tx >= 100: CreateCommand(2,"x","linear") #user input moves the robotic arm
-                    if tx <= -100: CreateCommand(-2,"x","linear")
-                    if ty >= 100: CreateCommand(2,"y","linear")
-                    if ty <= -100: CreateCommand(-2,"y","linear")
+                    if tx >= 100: CreateCommand(-2,"x","linear") #user input moves the robotic arm
+                    if tx <= -100: CreateCommand(2,"x","linear")
+                    if ty >= 100: CreateCommand(-2,"y","linear")
+                    if ty <= -100: CreateCommand(2,"y","linear")
                     if tz >= 100: CreateCommand(2,"z","linear")
                     if tz <= -100: CreateCommand(-2,"z","linear")
                 if data[0] == 2: # checks the data (R) and seperates the values (XYZ)
@@ -79,12 +79,12 @@ def main():
                     if data[4] > 127:ry -= 65536
                     if data[6] > 127:rz -= 65536
                     print ("R: ", rx, ry, rz)
-                    if rx >= 100: CreateCommand(100,"x","angular") #user input moves the robotic arm
-                    if rx <= -100: CreateCommand(-100,"x","angular") 
-                    if ry >= 100: CreateCommand(100,"y","angular")
-                    if ry <= -100: CreateCommand(-100,"y","angular")
-                    if rz >= 100: CreateCommand(100,"z","angular")
-                    if rz <=  -100: CreateCommand(-100,"z","angular")
+                    if rx >= 100: CreateCommand(-100,"x","angular") #user input moves the robotic arm
+                    if rx <= -100: CreateCommand(100,"x","angular") 
+                    if ry >= 100: CreateCommand(-100,"y","angular")
+                    if ry <= -100: CreateCommand(100,"y","angular")
+                    if rz >= 100: CreateCommand(-100,"z","angular")
+                    if rz <=  -100: CreateCommand(100,"z","angular")
 
                 if data[0] == 3 and data[1] == 0: #side button Left, goes to a sade position
                     proportional_gain = 2.0
