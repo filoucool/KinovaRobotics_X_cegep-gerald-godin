@@ -86,7 +86,7 @@ def main():
                     if rz >= 100: CreateCommand(-100,"z","angular")
                     if rz <=  -100: CreateCommand(100,"z","angular")
 
-                if data[0] == 3 and data[1] == 0: #side button Left, goes to a sade position
+                if data[0] == 3 and data[1] == 0: #side buttons, controls gripper
                     proportional_gain = 2.0
                     router = router
                     position += 0.1
