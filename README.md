@@ -17,7 +17,6 @@
 <H1> Contributeurs: </H1>
 <ul>
   <li> Félix Chenette-Stewart [Étudiant]</li>
-  <li> Rachid Benali [Professeur]</li>
  </ul>
  
 <H1> Comment Télécharger les codes? </H1>
