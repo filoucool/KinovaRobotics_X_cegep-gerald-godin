@@ -9,7 +9,7 @@
 <a href="https://github.com/filoucool/kinova_app"><span>Application Kinova</span></a>
 </P>
 
-<H1> Vous ne trouvez pas ce qu'il vous faut? </H1>
+<H1> Vous ne trouvez pas ce qu'il vous faut? Il y a un problème? </H1>
 <ul>
   <li> Félix Chenette-Stewart sur Omnivox Gérald-Godin ou 1661633@cgodin.qc.ca</li>
   <li> Ouvrir un <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a></li>
