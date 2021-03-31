@@ -27,7 +27,7 @@
 
 ```
  {Windows Powershell / Command Prompt / Linux}
-  > git clone https://github.com/filoucool/Arduino_Code_Examples.git
+  > git clone https://github.com/filoucool/KinovaRobotics_X_cegep-gerald-godin.git
 ```
 <ul>
  <li> <a href="https://www.instructables.com/Downloading-Code-From-GitHub/"><span>Via GitHub.com</span></a> </li>
