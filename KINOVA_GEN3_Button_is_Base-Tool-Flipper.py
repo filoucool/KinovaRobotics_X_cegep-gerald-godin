@@ -1,26 +1,3 @@
-"""
-MIT License
-
-Copyright (c) [2021] [Félix Chenette-Stewart]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
 import sys #import libraries and other tools/utils
 import os
 import time
@@ -52,11 +29,15 @@ def main():
     args = utilities.parseConnectionArguments() # Parse arguments
     with utilities.DeviceConnection.createTcpConnection(args) as router: # Create connection and get router
         base = BaseClient(router) # Create required services
+        reference = "BASE"
         while 1:
                 data = dev.read(ep_in.bEndpointAddress, ep_in.bLength, 0) #reads SpaceMouse data
                 def CreateCommand(vel, axys, mode): # command template with vel, axys, mode values
                     command = Base_pb2.TwistCommand()
-                    command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                    if reference == "BASE":
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_BASE
+                    elif reference == "TOOL":
+                        command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
                     command.duration = 0
                     twist = command.twist
                     if mode == "linear": #linear movements
@@ -87,12 +68,12 @@ def main():
                     if data[4] > 127:ty -= 65536
                     if data[6] > 127:tz -= 65536
                     print ("T: ", tx, ty, tz) #prints values
-                    if tx >= 100: CreateCommand(-2,"x","linear") #user input moves the robotic arm
-                    if tx <= -100: CreateCommand(2,"x","linear")
-                    if ty >= 100: CreateCommand(-2,"y","linear")
-                    if ty <= -100: CreateCommand(2,"y","linear")
-                    if tz >= 100: CreateCommand(2,"z","linear")
-                    if tz <= -100: CreateCommand(-2,"z","linear")
+                    if tx >= 100: CreateCommand(2,"y","linear") #user input moves the robotic arm
+                    if tx <= -100: CreateCommand(-2,"y","linear")
+                    if ty >= 100: CreateCommand(2,"x","linear")
+                    if ty <= -100: CreateCommand(-2,"x","linear")
+                    if tz >= 100: CreateCommand(-2,"z","linear")
+                    if tz <= -100: CreateCommand(2,"z","linear")
                 if data[0] == 2: # checks the data (R) and seperates the values (XYZ)
                     rx = data[1] + (data[2]*256)
                     ry = data[3] + (data[4]*256)
@@ -101,30 +82,19 @@ def main():
                     if data[4] > 127:ry -= 65536
                     if data[6] > 127:rz -= 65536
                     print ("R: ", rx, ry, rz)
-                    if rx >= 100: CreateCommand(-100,"x","angular") #user input moves the robotic arm
-                    if rx <= -100: CreateCommand(100,"x","angular") 
-                    if ry >= 100: CreateCommand(-100,"y","angular")
-                    if ry <= -100: CreateCommand(100,"y","angular")
-                    if rz >= 100: CreateCommand(-100,"z","angular")
-                    if rz <=  -100: CreateCommand(100,"z","angular")
+                    if rx >= 100: CreateCommand(100,"y","angular") #user input moves the robotic arm
+                    if rx <= -100: CreateCommand(-100,"y","angular") 
+                    if ry >= 100: CreateCommand(100,"x","angular")
+                    if ry <= -100: CreateCommand(-100,"x","angular")
+                    if rz >= 100: CreateCommand(100,"z","angular")
+                    if rz <=  -100: CreateCommand(-100,"z","angular")
 
-                if data[0] == 3 and data[1] == 0: #side button Left, goes to a sade position
-                    base_servo_mode = Base_pb2.ServoingModeInformation() # Make sure the arm is in Single Level Servoing mode
-                    base_servo_mode.servoing_mode = Base_pb2.SINGLE_LEVEL_SERVOING
-                    base.SetServoingMode(base_servo_mode)
-                    action_type = Base_pb2.RequestedActionType() # Move arm to ready position
-                    action_type.action_type = Base_pb2.REACH_JOINT_ANGLES
-                    action_list = base.ReadAllActions(action_type)
-                    action_handle = None
-                    for action in action_list.action_list:
-                        if action.name == "Home":
-                            action_handle = action.handle
+                if data[0] == 3 and data[1] == 0: #side button Left, changes reference mode, flipper
+                    if reference == "BASE": #BASE by default
+                        reference = "TOOL"
+                        reference
+                    elif reference == "TOOL":
+                        reference = "BASE"
                     
-                    e = threading.Event()
-                    notification_handle = base.OnNotificationActionTopic(
-                        check_for_end_or_abort(e),
-                        Base_pb2.NotificationOptions())
-                    base.ExecuteActionFromReference(action_handle)
-                    #end of main and loop
 if __name__ == "__main__":
     main()

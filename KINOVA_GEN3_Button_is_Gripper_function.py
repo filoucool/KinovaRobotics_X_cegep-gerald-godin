@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+
 import sys #import libraries and other tools/utils
 import os
 import time
@@ -57,7 +58,7 @@ def main():
                 data = dev.read(ep_in.bEndpointAddress, ep_in.bLength, 0) #reads SpaceMouse data
                 def CreateCommand(vel, axys, mode): # command template with vel, axys, mode values
                     command = Base_pb2.TwistCommand()
-                    command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL
+                    command.reference_frame = Base_pb2.CARTESIAN_REFERENCE_FRAME_TOOL  
                     command.duration = 0
                     twist = command.twist
                     if mode == "linear": #linear movements
@@ -125,4 +126,8 @@ def main():
                         position = 0
                     #end of main and loop
 if __name__ == "__main__":
+<<<<<<< HEAD
+    main()      
+=======
     main()
+>>>>>>> 3ab42f77a7e3948dec772c2706b24512e16c56f9
