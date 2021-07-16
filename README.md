@@ -36,7 +36,8 @@
 </ul>
 
   
-  
+ <H1>In English</H1>
+ 
 <H1> Libraries and codes related to the GEN3 robotic arm from Kinova Robotics.</H1>
 
 <P>Here are some Python codes used to control Kinova's GEN3 Lite from a 3DConnexion SpaceMouse Compact mouse. This new intuitive way to control the robotic arm manually uses USB Core and the API from Kinova (Kortex)
