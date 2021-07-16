@@ -53,7 +53,7 @@ Several codes are currently in development and others are planned for the future
   <li> Open an  <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue on github</span></a></li>
   <li> Come see me at my school office 469a (all the way to the back of the class 469b or the back of lab 468) <br>everyday between 9am and 9pm</li>
  <br>
- <P> <strong> <u> It is better to open a<a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a> </u><strong> </p>
+ <P> <strong> <u> It is better to open an <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a> </u> <strong> </p>
  </ul>
  
 <H1> Contributors: </H1>
