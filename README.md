@@ -51,7 +51,7 @@ Several codes are currently in development and others are planned for the future
 <ul>
   <li> Félix Chenette-Stewart on Omnivox Gérald-Godin or my school email: 1661633@cgodin.qc.ca</li>
   <li> Open an  <a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue on github</span></a></li>
-  <li> VCome see me at my school office 469a (all the way to the back of the class 469b or the back of lab 468) <br>everyday between 9am and 9pm</li>
+  <li> Come see me at my school office 469a (all the way to the back of the class 469b or the back of lab 468) <br>everyday between 9am and 9pm</li>
  <br>
  <P> <strong> <u> It is better to open a<a href="https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue"><span>issue</span></a> </u><strong> </p>
  </ul>
