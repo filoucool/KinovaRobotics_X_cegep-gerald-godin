@@ -4,9 +4,6 @@
 <BR>
  Plusieurs codes sont présentement en développement et d'autre sont prévus pour le futur. Pour le moment, le code pour la combinaison 3DConnexion et Kortex est stable et sans bug.
  <BR>
- Application Kinova pour démontration de restaurant automatisé (en développement)
-  <BR>
-<a href="https://github.com/filoucool/kinova_app"><span>Application Kinova</span></a>
 </P>
 
 <H1> Vous ne trouvez pas ce qu'il vous faut? Il y a un problème? </H1>
